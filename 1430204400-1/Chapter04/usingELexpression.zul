@@ -1,0 +1,6 @@
+<window title="EL Test" width="200px">
+<zscript>
+    String abc = "ABC";
+</zscript>
+  <button label="${abc}"/>
+</window>

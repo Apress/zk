@@ -1,0 +1,3 @@
+<window title="My Second window" border="normal" height="200px" width="200px" closable="true" sizable="true">
+  Hello, World!
+</window>

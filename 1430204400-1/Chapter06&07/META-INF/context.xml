@@ -1,0 +1,12 @@
+<context>
+		<!-- 
+		The connection pool will be bound into JNDI with the name
+		"java:comp/env/jdbc/hsql"
+		-->
+		<Resource name="jdbc/hsql" username="sa" password=""
+			url="jdbc:hsqldb:file:/hsqldb/petshop"
+			auth="Container" defaultAutoCommit="false"
+			driverClassName="org.hsqldb.jdbcDriver" maxActive="20"
+			timeBetweenEvictionRunsMillis="60000"
+			type="javax.sql.DataSource"/>
+</context>

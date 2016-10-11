@@ -1,0 +1,9 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<body>
+<iframe id="yy"/>
+<script type="text/JavaScript">
+var frm = window.frames['yy'];
+frm.document.write("hello world!");
+</script>
+</body>
+</html>

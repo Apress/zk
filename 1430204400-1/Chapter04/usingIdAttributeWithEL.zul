@@ -1,0 +1,4 @@
+<window>
+  <textbox id="source" value="ABC"/>
+  <label value="${source.value}"/>
+</window>

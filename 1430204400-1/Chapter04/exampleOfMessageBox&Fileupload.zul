@@ -1,0 +1,13 @@
+<window title="Fileupload Demo" border="normal">
+  <image id="image"/>
+  <button label="Upload">
+    <attribute name="onClick">{
+      Object media = Fileupload.get(); //the upload dialog appear
+      if (media instanceof org.zkoss.image.Image)
+        image.setContent(media);
+      else if (media != null)
+        Messagebox.show("Not an image: "+media, 
+          "Error", Messagebox.OK, Messagebox.ERROR);
+    }</attribute>
+  </button>
+</window>

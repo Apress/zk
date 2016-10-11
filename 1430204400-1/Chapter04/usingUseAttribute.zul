@@ -1,0 +1,2 @@
+<window id="main" onCreate="MyClass.init(main)"
+  onOK="MyClass.save(main)" onCancel="MyClass.cancel(main)"/>

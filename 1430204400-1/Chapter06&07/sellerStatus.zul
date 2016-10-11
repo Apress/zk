@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window  border="normal"
+xmlns="http://www.zkoss.org/2005/zul" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd "
+width="400px" height="300px">
+<div align="center">
+<vbox>
+<label style="font-size:large;font-weight:bold;" value="${arg.firstName}, Thank you for submitting your pet ${arg.petName}"/>
+<label value="Here's the uplodaed photo of your pet"/>
+<image src="${arg.imageURL}" height="100px"/>
+Would you like to:-
+<hbox>
+  <image src="/images/seller-thumb.jpg" tooltiptext="Sell another pet" onClick="self.spaceOwner.detach()"/>
+  <image src="/images/catalog-thumb.jpg" tooltiptext="See the pet you just uploaded" onClick="Executions.sendRedirect(&quot;catalog.zul#&quot;+self.getAttribute(&quot;itemID&quot;))">
+  	<custom-attributes itemID="${arg.itemID}"/>
+  </image>
+  <image src="/images/index-thumb.jpg" tooltiptext="Go back to homepage" onClick="Executions.sendRedirect(&quot;index.zul&quot;)"/>
+</hbox>
+</vbox>
+</div>
+</window>

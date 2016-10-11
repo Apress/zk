@@ -1,0 +1,4 @@
+<window>
+  <label value="Vote 1" if="${param.vote}"/>
+  <label value="Vote 2" unless="${!param.vote}"/>
+</window>

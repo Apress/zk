@@ -1,0 +1,3 @@
+<window title="Hello" border="normal">
+  <button label="Say Hello" onClick="alert(&quot;Hello World!&quot;)"/>
+</window>

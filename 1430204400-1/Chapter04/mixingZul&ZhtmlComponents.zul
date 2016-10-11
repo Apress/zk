@@ -1,0 +1,36 @@
+<window title="mix HTML demo" 
+  xmlns:h="http://www.w3.org/1999/xhtml" 
+  xmlns:x="http://www.zkoss.org/2005/zul"
+  xmlns:zk="http://www.zkoss.org/2005/zk">
+  <h:table border="1">
+    <h:tr>
+      <h:td>
+        column 1
+      </h:td>
+      <h:td>
+        <listbox id="list" mold="select">
+          <listitem label="AA"/>
+          <listitem label="BB"/>
+        </listbox>
+      </h:td>
+      <h:td>
+        <h:ul id="ul">
+          <h:li>The first item.</h:li>
+          <h:li>The second item.</h:li>
+        </h:ul>
+        <h:input type="button" value="ZHTML button Add Item" 
+          zk:onClick="addItem()"/>
+        <x:button label="ZUL button Add Item" onClick="addItem()"/>
+        <zscript>
+          import org.zkoss.zhtml.Li;
+          import org.zkoss.zhtml.Text;
+          void addItem() {
+            Li li = new Li();
+            li.setParent(ul);
+            new Text("Item "+ul.getChildren().size()).setParent(li);
+          }
+        </zscript>
+      </h:td>
+    </h:tr>
+  </h:table>
+</window>

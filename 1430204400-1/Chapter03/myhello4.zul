@@ -1,0 +1,6 @@
+<window id="win" title="My Second window" border="normal"
+height="200px" width="200px" closable="true" sizable="true">
+  Hello, World!
+  <button label="change title" 
+  onClick="win.title=&quot;ZK applicaiton with Ajax&quot;"/>
+</window>

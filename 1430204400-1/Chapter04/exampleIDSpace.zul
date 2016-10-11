@@ -1,0 +1,12 @@
+<?page id="page1"?>
+<zk>
+  <window id="winA">
+    <label id="labelB" value="Label B"/>
+    <window id="winC">
+      <label id="labelB" value="Label B"/>
+    </window>
+  </window>
+  <vbox id="vboxD">
+    <label id="labelE" value="Label E"/>
+  </vbox>
+</zk>

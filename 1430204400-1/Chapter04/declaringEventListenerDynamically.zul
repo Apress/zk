@@ -1,0 +1,10 @@
+<window title="Hello" border="normal">
+  <button id="hellobtn" label="Say Hello"/>
+  <zscript>
+    hellobtn.addEventListener("onClick", new EventListener() {
+      public void onEvent(Event event) {
+        Messagebox.show("Hello World!");
+      }
+    });
+  </zscript>
+</window>

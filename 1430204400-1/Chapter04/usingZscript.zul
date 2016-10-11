@@ -1,0 +1,10 @@
+<window id="winHello" title="Hello" border="normal">
+  <button label="Say Hello" onClick="sayHello()"/>
+  <zscript>
+    int count = 1;
+    void sayHello() { 
+//declare a global function
+      alert("Hello World! "+ count++);
+    }
+  </zscript>
+</window>

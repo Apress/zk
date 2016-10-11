@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="win" xmlns="http://www.zkoss.org/2005/zul"
+use="org.zkforge.petshop.controller.MapWindow"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<include src="banner.zul"/>
+<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAmGxmYR57XDAbAumS9tV5fxTwM0brOpm-All5BF6PoaKBxRWWERSynObNOWSyMNmLGAMZAO1WkDUubA"/>
+<div align="center">
+	<div id="pane1" width="650px" align="left">
+		<grid>
+			<columns>
+				<column width="80px" align="right"/>
+				<column/>
+			</columns>
+			<rows>
+				<row spans="2">
+					<div align="left">
+						<label style="font-style:italic; font-size: normal" value="Select the category whose items will be displayed in a Google map based on the Seller's address. Optionally, enter a &quot;Center Point Address&quot; and &quot;Area&quot; to limit the search to a specific area around the center point."/>
+					</div>
+				</row>
+				<row>
+					<label style="font-weight:bold" value="Select Category to Map:"/>
+					<radiogroup id="rgroup">
+						<radio id="CATS" label="Cats" checked="true"/>
+						<radio id="DOGS" label="Dogs"/>
+						<radio id="BIRDS" label="Birds"/>
+						<radio id="REPTILES" label="Reptiles"/>
+						<radio id="FISH" label="Fish"/>
+					</radiogroup>
+				</row>
+				<row>
+					<label style="font-weight:bold" value="Center Point Address:"/>
+					<vbox width="100%">
+						<textbox id="caddr" width="98%"/>
+						<label style="font-style:italic;font-size:xx-small;" value="For example: 4140 Network Circle, Santa Clara, CA, 95054"/>
+					</vbox>
+				</row>
+				<row>
+					<label style="font-weight:bold" value="Area (in Miles):"/>
+					<intbox id="radius" constraint="no negative, no zero" value="30" cols="7"/>
+				</row>
+				<row spans="2">
+					<div align="center">
+					<button label="Map Category" onClick="win.showItems()"/>
+					</div>
+				</row>
+			</rows>
+		</grid>
+	</div>
+</div>
+<separator bar="true"/>
+<hbox>
+<grid width="400px">
+<rows id="items">
+</rows>
+</grid>
+<popup id="info" width="300px" onOpen="win.whenPopup(event)">
+</popup>
+<gmaps id="maps" width="700px" height="500px" showLargeCtrl="true" showTypeCtrl="true" onMapClick="win.showInfo(event)"/>
+</hbox>
+</window>

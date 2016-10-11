@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="catalogwin" use="org.zkforge.petshop.controller.CatalogWindow" 
+xmlns="http://www.zkoss.org/2005/zul"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<include src="banner.zul"/>
+<style>
+div.tabpanel-real {
+	border-left: 1px solid #5C6C7C; border-right: 1px solid #5C6C7C; 
+	border-bottom: 1px solid #5C6C7C; padding: 5px;
+}
+</style>
+<script type="text/javascript">
+<![CDATA[
+var grade = 0;
+function starOn(elm, n, rating) {
+	var stars = elm.getElementsByTagName("img");
+	var j = 0;
+	rating.innerHTML = "&nbsp;";
+  for (; j < n; ++j) {
+  	stars[j].src = "/zkPetShop/images/star-on.gif";
+  	if ((j+1) == n) {
+  		rating.innerHTML = stars[j].title;
+  	}
+  }
+  for (; j < stars.length; ++j) {
+		stars[j].src = "/zkPetShop/images/star-off.gif";
+	}
+}
+function starClear(elm, rating) {
+	starOn(elm, grade, rating);
+}
+function setgrade(x) {
+	grade = x;
+}
+var offset=0;
+var inelm;
+var leftelm;
+var rightelm;
+var timeid;
+function move(outelm0, inelm0, leftelm0, rightelm0, toleft) {
+	var outelm = outelm0;
+	inelm = inelm0;
+	leftelm = leftelm0;
+	rightelm = rightelm0;
+
+	var outwidth = outelm.offsetWidth;
+	var inwidth = inelm.scrollWidth;
+	
+	offset = outwidth - inwidth;
+	if (offset > 0) {
+		offset = 0;
+	}
+	if (toleft) {
+		movingleft();
+	} else {
+		movingright();
+	}
+
+}
+
+function movingright()
+{
+		var left = inelm.offsetLeft;
+		
+    if (offset < left){
+    	var diff = left - offset;
+    	if (diff > 4) {
+    		diff = 4;
+    	}
+      inelm.style.left = ""+(left-diff)+"px";
+      
+      timeid = setTimeout("movingright()", 20);
+      if (offset < 0) {
+	      leftelm.style.display="";
+	    }
+    } else {
+    	rightelm.style.display="none";
+    }
+    
+}
+function movingleft()
+{
+	var left = inelm.offsetLeft;
+		
+    if (left < 0){
+    	var diff = 0-left ;
+    	if (diff > 4) {
+    		diff = 4;
+    	}
+      inelm.style.left = ""+(left+diff)+"px";
+      
+      timeid = setTimeout("movingleft()", 20);
+      if (offset < 0) {
+	      rightelm.style.display="";
+	    }
+    } else {
+    	leftelm.style.display="none";
+    }
+}
+function stop() {
+	clearTimeout(timeid);
+}
+
+var infoelm;
+var slideid;
+function slideup(infoelm0, downelm, upelm) {
+	infoelm = infoelm0;
+	slidingup();
+	downelm.style.display="block";
+	upelm.style.display="none";
+}
+function slidedown(infoelm0, downelm, upelm) {
+	infoelm = infoelm0;
+	slidingdown();
+	downelm.style.display="none";
+	upelm.style.display="";
+}
+function slidingdown()
+{
+	var top = infoelm.offsetTop;
+		
+    if (top < 75){
+    	var diff = 75 - top ;
+    	if (diff > 4) {
+    		diff = 4;
+    	}
+      infoelm.style.top = ""+(top+diff)+"px";
+      
+      slideid = setTimeout("slidingdown()", 20);
+    } else {
+    	clearTimeout(slideid);
+    }
+}
+function slidingup()
+{
+	var top = infoelm.offsetTop;
+		
+    if (top > 0){
+    	var diff = top ;
+    	if (diff > 4) {
+    		diff = 4;
+    	}
+      infoelm.style.top = ""+(top-diff)+"px";
+      
+      slideid = setTimeout("slidingup()", 20);
+    } else {
+    	clearTimeout(slideid);
+    }
+}
+
+]]>
+</script>
+<div align="center">
+<hbox valign="top" style="text-align: left;">
+	<tabbox id="cattbx" width="150px" mold="accordion">
+		<tabs>
+			<tab forEach="${categories}" id="${each.categoryID}" label="${each.name}" selected="${each.categoryID == catID}"/>
+		</tabs>
+		<tabpanels>
+			<tabpanel forEach="${categories}" height="380px" >
+				<vbox>
+				<zscript>
+					import org.zkforge.petshop.model.CatalogFacade;
+					List tmpproducts = new CatalogFacade().getProducts(each.categoryID);
+				</zscript>
+				<toolbarbutton forEach="${tmpproducts}" label="${each.name}" tooltiptext="${each.description}">
+					<attribute name="onClick">{
+					  import org.zkforge.petshop.model.Item;
+					  
+						String pID = self.getAttribute("productID");
+						List items = catalogwin.getItems(pID);
+						Item item = items.get(0);
+						catalogwin.refreshThumbs(items);
+						catalogwin.refreshItem(item);
+					}</attribute>
+					<custom-attributes productID = "${each.productID}"/>
+				</toolbarbutton>
+				</vbox>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+	<div style="background-color:#ececec">
+	<vbox width="500px">
+	<div height="375px" style="overflow:hidden">
+		<image id="bigimage" width="500px" height="375px" src="${item.imageURL}"/>
+	</div>
+	<div id="cover" width="500px" height="145px" style="overflow:hidden;position:relative;top:-75px;margin-bottom:-75px">
+	<div id="info" height="145px" style="position:relative;top:75px;background-color:#ececec;filter:alpha(opacity=70);-moz-opacity:0.7;opacity:0.7;">
+		<hbox  style="text-align:center;">
+			<label id="itemName" value="${item.name}" width="150px"/>
+			<vbox style="text-align:center" width="200px">
+				<label id="starDesc" value="Average"/>
+				<div align="center">
+				<hbox id="stars" spacing="0px">
+					<image id="star1" src="/images/star-off.gif" tooltiptext="Hate It" action="onmouseover:starOn(#{stars}, 1, #{starDesc});onmouseout:starClear(#{stars}, #{starDesc});" onClick="item.addRating(1);catalogwin.refreshRating(item);"/>
+					<image id="star2" src="/images/star-off.gif" tooltiptext="Below Average" action="onmouseover:starOn(#{stars}, 2, #{starDesc});onmouseout:starClear(#{stars}, #{starDesc});" onClick="item.addRating(2);catalogwin.refreshRating(item);"/>
+					<image id="star3" src="/images/star-off.gif" tooltiptext="Average" action="onmouseover:starOn(#{stars}, 3, #{starDesc});onmouseout:starClear(#{stars}, #{starDesc});" onClick="item.addRating(3);catalogwin.refreshRating(item);"/>
+					<image id="star4" src="/images/star-off.gif" tooltiptext="Above Average" action="onmouseover:starOn(#{stars}, 4, #{starDesc});onmouseout:starClear(#{stars}, #{starDesc});" onClick="item.addRating(4);catalogwin.refreshRating(item);"/>
+					<image id="star5" src="/images/star-off.gif" tooltiptext="Love It" action="onmouseover:starOn(#{stars}, 5, #{starDesc});onmouseout:starClear(#{stars}, #{starDesc});" onClick="item.addRating(5);catalogwin.refreshRating(item);"/>
+				</hbox>
+				</div>
+			</vbox>
+			<decimalbox id="price" style="text-align:right" value="${item.price}" format="$#,##0.00" readonly="true" width="70px"/>
+			<label value="paypal" width="80px"/>
+			<vbox>
+				<space spacing="5px"/>
+				<image id="up" src="/images/up.gif" tooltiptext="Show Details" action="onclick:slideup(#{info}, #{down}, #{up})" style="cursor:pointer;"/>
+				<image id="down" src="/images/down.gif" tooltiptext="Show Less Details" action="onclick:slidedown(#{info}, #{down}, #{up})" style="cursor:pointer;display:none;"/>
+			</vbox>
+		</hbox>
+		<vbox>
+			<html id="shortDesc" content="${item.shortDescription}"/>
+			<separator></separator>
+			<html id="longDesc" content="${item.description}"/>
+		</vbox>
+	</div>
+	</div>
+	<div id="outid" style="overflow:hidden;background-color:#546474;position:relative;" width="500px" height="74px">
+		<hbox id="inid" spacing="2px" style="position:relative;top:2px;background-color: #546474;left:0px;">
+			<image src="${each.imageThumbURL}" height="70px" style="cursor:pointer;" forEach="${items}">
+				<custom-attributes item="${each}"/>
+				<zscript>
+					self.addEventListener("onClick", selectItemListener);
+				</zscript>
+			</image>
+		</hbox>
+		<div  id="leftid" style="cursor:pointer;float:left;position:relative;top:-65px;" tooltiptext="Show Previous Items" visible="false">
+			<image src="/images/left.gif" action="onmouseover:move(#{outid}, #{inid}, #{leftid}, #{rightid}, true);onmouseout:stop();"/>
+		</div>
+		<div  id="rightid" style="cursor:pointer;float:right;position:relative;top:-65px;" tooltiptext="Show More Items">
+			<image src="/images/right.gif" action="onmouseover:move(#{outid}, #{inid}, #{leftid}, #{rightid}, false);onmouseout:stop();"/>
+		</div>
+	</div>
+	</vbox>
+	</div>
+</hbox>
+</div>
+</window>

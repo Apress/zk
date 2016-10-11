@@ -1,0 +1,7 @@
+<window title="Vote" border="normal">
+  Do you like ZK? 
+<label id="label"/>
+  <separator/>
+  <button label="Yes" onClick="label.value = self.label"/>
+  <button label="No" onClick="label.value = self.label"/>
+</window>

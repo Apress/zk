@@ -1,0 +1,10 @@
+<window title="Hello" border="normal">
+  <zscript>
+    class MyButton extends Button {
+      public void onClick(MouseEvent event) {
+        Messagebox.show("Hello World!");
+      }
+    }
+  </zscript>
+  <button label="Say Hello" use="MyButton"/>
+</window>

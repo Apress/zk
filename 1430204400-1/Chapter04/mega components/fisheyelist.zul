@@ -1,0 +1,18 @@
+<zk>
+  <fisheyelist id="fi" style="position:absolute;margin:20px"~CCC
+attachEdge="top">
+    <fisheyeitem image="/img/icon_browser.png" 
+      label="Web Browser" onClick="alert(self.label)"/>
+    <fisheyeitem image="/img/icon_calendar.png"
+      label="Calendar" onClick="alert(self.label)"/>
+    <fisheyeitem image="/img/icon_email.png"
+      label="Email" onClick="alert(self.label)"/>
+    <fisheyeitem image="/img/icon_texteditor.png"
+      label="Text Editor" onClick="alert(self.label)"/>
+    <fisheyeitem image="/img/icon_update.png"
+      label="Software Update" onClick="alert(self.label)"/>
+    <fisheyeitem image="/img/icon_users.png"
+      label="Users" onClick="alert(self.label)"/>
+  </fisheyelist>
+  <div height="200px" width="100%" style="border:1px solid black;"/>
+</zk>

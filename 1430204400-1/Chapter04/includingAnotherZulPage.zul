@@ -1,0 +1,5 @@
+<?page id="page2"?>
+<window id="winH">
+  <label id="labelI" value="Label I"/>
+  <include src="page1.zul"/>
+</window>

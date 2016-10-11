@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns="http://www.zkoss.org/2005/zul"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<include src="banner.zul"/>
+<style>
+div.grid-no-border{ 
+	border: none;
+}
+.xxlarge 
+{
+    font-size: xx-large;
+    color: red;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.xlarge 
+{
+    font-size: x-large;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.large
+{
+    font-size: large;
+    color: green;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.medium 
+{
+    font-size: medium;
+    cursor: pointer;
+    color: black;
+    text-decoration: underline;
+}
+
+</style>
+<zscript>
+	void go(String catid) {
+		if (catid != null) {
+			if ("BIGBIRDS".equals(catid))
+				catid = "BIRDS";
+				
+			Executions.sendRedirect("catalog.zul?catid="+catid+"#0");
+		}
+	}
+</zscript>
+<hbox valign="top">
+	<fisheyelist id="fi"
+		itemWidth="170" itemHeight="50"
+		itemMaxWidth="340" itemMaxHeight="100"
+		itemPadding="10"
+		attachEdge="left" labelEdge="right"
+		orient= "vertical">
+		<fisheyeitem image="/images/dogs_icon.gif" onClick='go("DOGS")'/>
+		<fisheyeitem image="/images/cats_icon.gif" onClick='go("CATS")'/>
+		<fisheyeitem image="/images/birds_icon.gif" onClick='go("BIRDS")'/>
+		<fisheyeitem image="/images/fish_icon.gif" onClick='go("FISH")'/>
+		<fisheyeitem image="/images/reptiles_icon.gif" onClick='go("REPTILES")'/>
+	</fisheyelist>
+	<space spacing="12px"/>
+	<imagemap src="/images/splash.gif" tooltiptext="Pet Selection Map" 
+	width="350" height="355" onClick="go(event.area)">
+		<area id="BIGBIRDS" tooltiptext="Birds" coords="72,2,280,250"/>
+		<area id="FISH" tooltiptext="Fish" coords="2,180,72,250"/>
+		<area id="DOGS" tooltiptext="Dogs" coords="60,250,130,320"/>
+		<area id="REPTILES" tooltiptext="Reptiles" coords="140,270,210,340"/>
+		<area id="CATS" tooltiptext="Cats" coords="225,240,295,310"/>
+		<area id="BIRDS" tooltiptext="Birds" coords="280,180,350,250"/>
+	</imagemap>
+</hbox>
+</window>

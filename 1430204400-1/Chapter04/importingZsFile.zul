@@ -1,0 +1,4 @@
+<window title="Hello" border="normal">
+  <button label="Say Hello" onClick="sayHello()"/>
+  <zscript src="sayHello.zs"/>
+</window>

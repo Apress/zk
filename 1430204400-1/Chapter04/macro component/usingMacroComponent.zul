@@ -1,0 +1,4 @@
+<?component name="username" macro-uri="/WEB-INF/macros/username.zul"?>
+<window>
+  <username/>
+</window>

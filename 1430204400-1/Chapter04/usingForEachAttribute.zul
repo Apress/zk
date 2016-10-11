@@ -1,0 +1,8 @@
+<window>
+  <zscript>
+    contacts = new String[] {"Monday", "Tuesday", "Wednesday"};
+  </zscript>
+  <listbox width="100px">
+    <listitem label="${each}" forEach="${contacts}"/>
+  </listbox>
+</window>

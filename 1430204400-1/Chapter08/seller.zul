@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<window id="win" use="org.zkforge.petshop.controller.SellerWindow" 
+xmlns:a="http://www.zkoss.org/2005/zk/annotation"
+xmlns="http://www.zkoss.org/2005/zul"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<include src="banner.zul"/>
+<div align="center">
+	<div id="pane1" width="650px" align="left">
+		<grid>
+			<columns>
+				<column width="250px"/>
+				<column/>
+			</columns>
+			<rows>
+				<row spans="2"><div align="center"><label style="font-weight:bold;" value="Information about your pet"/></div></row>
+				<row>Category:
+					<a:bind model="win.products" selectedItem="win.product"/>
+					<listbox id="products" mold="select" rows="1">
+						<a:bind _var="product" value="product" label="product.name"/>
+						<listitem/>
+					</listbox>
+				</row>
+				<row>*Pet's name: 
+					<a:bind value="win.item.name"/>
+					<textbox id="petName"/>
+				</row>
+				<row>*Description(3 lines max): 
+					<a:bind value="win.item.description;save-when:self.onChange;access:both;"/>
+					<fckeditor id="description" customConfigurationsPath="/seller.js" toolbarSet="seller" height="100px"></fckeditor></row>
+				<row>*Price(In US dollars): 
+					<a:bind value="win.item.price"/>
+					<decimalbox id="price" format="$#,##0.00"></decimalbox>
+				</row>
+				<row>
+					<hbox>*Image File: 
+						<button id="image" label="upload" onClick="win.upload()"/>
+					</hbox>
+					<image id="picture" width="100px" height="77px"/></row>
+				<row visible="false">Custom Tag Keywords(separate by space): <textbox id="tags" cols="30"></textbox></row>
+			</rows>
+		</grid>
+		<label style="font-size:xx-small" value="Required fields are designated by a *"/>
+		<div align="right">
+			<button label="Next &gt;&gt;" onClick="win.next()"/>
+		</div>
+	</div>
+
+	<div id="pane2" visible="false" width="650px" align="left">
+		<grid>
+			<columns>
+				<column width="250px"/>
+				<column/>
+			</columns>
+			<rows>
+				<row spans="2"><div align="center"><label style="font-weight:bold;" value="Information about yourself"/></div></row>
+				<row>*First Name:	
+					<a:bind value="win.item.contactInfo.firstName"/>
+					<textbox id="firstName"/>
+				</row>
+				<row>*Last name: 
+					<a:bind value="win.item.contactInfo.lastName"/>
+					<textbox id="lastName"/>
+				</row>
+				<row>Seller Email: 
+					<a:bind value="win.item.contactInfo.email"/>
+					<textbox id="email"/>
+				</row>
+				<row>*Street: 
+					<a:bind value="win.item.address.street1"/>
+					<textbox id="street" cols="50"/>
+				</row>
+				<row>*City: 
+					<a:bind value="win.item.address.city"/>
+					<textbox id="city"/>
+				</row>
+				<row>*State: 
+					<a:bind value="win.item.address.state"/>
+					<textbox id="state"/>
+				</row>
+				<row>*ZipCode: 
+					<a:bind value="win.item.address.zip"/>
+					<textbox id="zipCode"/>
+				</row>
+				<row>
+					<vbox>
+					Enter the text as it is shown below (case insensitive)
+					<captcha id="captcha" length="5" noise="false"/>
+					</vbox>
+					<a:bind value="win.verify"/>
+					<textbox id="verify" constraint="No Empty" maxlength="5"/>
+				</row>
+			</rows>
+		</grid>
+		<label style="font-size:xx-small" value="Required fields are designated by a *"/>
+		<div align="right">
+			<button label="&lt;&lt; Previous" onClick="win.prev();"/>
+			<button label="Submit" onClick="win.submit()"/>
+		</div>
+	</div>
+</div>
+</window>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="win" use="org.zkforge.petshop.controller.SellerWindow" xmlns="http://www.zkoss.org/2005/zul"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<include src="banner.zul"/>
+<div align="center">
+	<div id="pane1" width="650px" align="left">
+		<grid>
+			<columns>
+				<column width="250px"/>
+				<column/>
+			</columns>
+			<rows>
+				<row spans="2"><div align="center"><label style="font-weight:bold;" value="Information about your pet"/></div></row>
+				<row>Category: <listbox id="products" mold="select" rows="1"/></row>
+				<row>*Pet's name: <textbox id="petName" constraint="/.[a-zA-Z]+/"/></row>
+				<row>*Description(3 lines max): <fckeditor id="description" customConfigurationsPath="/seller.js" toolbarSet="seller" height="100px"></fckeditor></row>
+				<row>*Price(In US dollars): <decimalbox id="price" format="$#,##0.00"></decimalbox></row>
+				<row>
+					<hbox>*Image File: 
+						<button id="image" label="upload" onClick="win.upload()"/>
+					</hbox>
+					<image id="picture" width="100px" height="77px"/>
+					</row>
+			    <row visible="false">
+		            Tags <textbox id="tags"/>
+			    </row>				
+			</rows>
+		</grid>
+		<label style="font-size:xx-small" value="Required fields are designated by a *"/>
+		<div align="right">
+			<button label="Next &gt;&gt;" onClick="win.next()"/>
+		</div>
+	</div>
+
+	<div id="pane2" visible="false" width="650px" align="left">
+		<grid>
+			<columns>
+				<column width="250px"/>
+				<column/>
+			</columns>
+			<rows>
+				<row spans="2"><div align="center"><label style="font-weight:bold;" value="Information about yourself"/></div></row>
+				<row>*First Name:	<textbox id="firstName" constraint="/.[a-zA-Z]+/" /></row>
+				<row>*Last name: <textbox id="lastName" constraint="/.[a-zA-Z]+/" /></row>
+				<row>Seller Email: <textbox id="email" constraint="/.+@.+\.[a-z]+/"/></row>
+				<row>*Street: <textbox id="street" cols="50" constraint="/.[a-zA-Z0-9]+/"/></row>
+				<row>*City: <textbox id="city" constraint="/.[a-zA-Z]+/"/></row>
+				<row>*State: <textbox id="state" constraint="/.[a-zA-Z]+/"/></row>
+				<row>*ZipCode: <textbox id="zipCode"/></row>
+				<row>
+					<vbox>
+					Enter the text as it is shown below (case insensitive)
+					<captcha id="captcha" length="5" noise="false"/>
+					</vbox>
+					<textbox id="verify" constraint="No Empty" maxlength="5"/>
+				</row>
+			</rows>
+		</grid>
+		<label style="font-size:xx-small" value="Required fields are designated by a *"/>
+		<div align="right">
+			<button label="&lt;&lt; Previous" onClick="win.prev();"/>
+			<button label="Submit" onClick="win.submit()"/>
+		</div>
+	</div>
+</div>
+</window>
